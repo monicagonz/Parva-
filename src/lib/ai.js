@@ -2,7 +2,7 @@
 // Coach financiero usando Featherless.ai (compatible con OpenAI)
 
 const FEATHERLESS_URL = 'https://api.featherless.ai/v1/chat/completions'
-const MODEL = 'meta-llama/Llama-3.3-70B-Instruct' // excelente en español
+const MODEL = 'deepseek-ai/DeepSeek-V3.2' // excelente en español
 
 export async function askCoach({ question, summary, userName }) {
   const systemPrompt = `Eres la coach financiera de Parva, una app para mujeres emprendedoras en Colombia y LATAM.
