@@ -5,7 +5,7 @@
 
 ---
 
-## 🚀 Setup en 15 minutos
+## Setup en 15 minutos
 
 ### 1. Clonar e instalar
 ```bash
@@ -88,7 +88,7 @@ npm run dev
 
 ---
 
-## 🌐 Deploy en Vercel (5 minutos)
+##  Deploy en Vercel (5 minutos)
 
 ```bash
 # Instalar Vercel CLI
@@ -118,7 +118,7 @@ vercel --prod
 
 ---
 
-## 🛠️ Tecnologías
+##  Tecnologías
 - **React + Vite** — Frontend
 - **Supabase** — Base de datos + autenticación
 - **Featherless.ai** — Coach IA (Llama 3.3 70B)
@@ -127,7 +127,7 @@ vercel --prod
 
 ---
 
-## 💡 Flujo del demo
+##  Flujo del demo
 
 1. **Registro** → solo nombre + celular, sin banco
 2. **Nueva venta** → monto + descripción → ver desglose automático
