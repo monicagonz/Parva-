@@ -1,0 +1,251 @@
+/* src/index.css */
+:root {
+  --verde:       #1d6a4a;
+  --verde-claro: #2d9e6e;
+  --verde-bg:    #e8f5ef;
+  --amarillo:    #f5c842;
+  --amarillo-bg: #fef9e7;
+  --rosa:        #e8547a;
+  --rosa-bg:     #fce8ee;
+  --crema:       #fdf8f0;
+  --tinta:       #111208;
+  --gris:        #f4f1ea;
+  --gris-medio:  #9e9b93;
+  --blanco:      #ffffff;
+  --sombra:      0 4px 24px rgba(17, 18, 8, 0.08);
+  --sombra-lg:   0 12px 40px rgba(17, 18, 8, 0.12);
+  --radio:       16px;
+  --radio-lg:    24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--crema);
+  color: var(--tinta);
+  min-height: 100vh;
+  max-width: 430px;       /* mobile first */
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.1;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  outline: none;
+}
+
+/* ── Utilidades ── */
+.card {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  padding: 20px;
+  box-shadow: var(--sombra);
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--verde);
+  color: white;
+  padding: 16px;
+  border-radius: var(--radio);
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:hover  { background: var(--verde-claro); }
+
+.btn-secondary {
+  width: 100%;
+  background: transparent;
+  color: var(--verde);
+  padding: 14px;
+  border-radius: var(--radio);
+  font-size: 15px;
+  font-weight: 500;
+  border: 2px solid var(--verde);
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  background: var(--verde-bg);
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #e2ddd5;
+  border-radius: var(--radio);
+  font-size: 16px;
+  background: white;
+  color: var(--tinta);
+  transition: border-color 0.2s;
+}
+.input-field:focus {
+  border-color: var(--verde);
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gris-medio);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.money {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+/* ── Bottom Nav ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  border-top: 1px solid #ede9e0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0 18px;
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--gris-medio);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 12px;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  color: var(--verde);
+}
+
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ── FAB ── */
+.fab {
+  position: fixed;
+  bottom: 90px;
+  right: calc(50% - 215px + 16px);
+  width: 56px;
+  height: 56px;
+  background: var(--amarillo);
+  color: var(--tinta);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(245, 200, 66, 0.5);
+  z-index: 99;
+  transition: transform 0.2s;
+}
+.fab:active { transform: scale(0.92); }
+
+/* ── Animaciones ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pop {
+  0%   { transform: scale(0.8); opacity: 0; }
+  70%  { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.animate-fadeup { animation: fadeUp 0.4s ease forwards; }
+.animate-pop    { animation: pop 0.35s ease forwards; }
+
+/* ── Page container ── */
+.page {
+  padding: 0 0 100px;
+  min-height: 100vh;
+}
+
+.page-header {
+  padding: 52px 20px 20px;
+  background: var(--verde);
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  color: white;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  margin-top: 4px;
+  font-weight: 300;
+}
+
+.page-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tinta);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 200;
+  white-space: nowrap;
+  animation: fadeUp 0.3s ease;
+}
