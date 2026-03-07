@@ -1,4 +1,4 @@
-# 🌱 Parva — La plata que te cuida
+#  Parva — La plata que te cuida
 
 > Neo-banca todo-en-uno para mujeres emprendedoras informales en LATAM.
 > SheShips Global Hackathon 2026
