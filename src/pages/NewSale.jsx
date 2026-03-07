@@ -205,9 +205,19 @@ export default function NewSale() {
           <p style={{ color: 'var(--rosa)', fontSize: 14, textAlign: 'center' }}>{error}</p>
         )}
 
-        <button className="btn-primary" onClick={handleSubmit} disabled={loading}
+        <button className="btn-primary" 
+          onClick={() => {
+            if (!form.amount || !form.description) return setError('Completa monto y descripción')
+            navigate('/app/qr', { 
+              state: { 
+                amount: Number(form.amount), 
+                description: form.description, 
+                category: form.category 
+              } 
+            })
+          }}
           style={{ marginTop: 8 }}>
-          {loading ? 'Guardando...' : 'Registrar venta ✓'}
+          Generar QR de cobro 
         </button>
       </div>
     </div>

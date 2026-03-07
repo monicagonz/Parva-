@@ -7,6 +7,9 @@ import NewSale from './pages/NewSale'
 import Inventory from './pages/Inventory'
 import AICoach from './pages/AICoach'
 import Layout from './components/Layout'
+import Inventory from './pages/Inventory'
+import QRCobro from './pages/QRCobro'
+
 
 function PrivateRoute({ children }) {
   const user = useStore((s) => s.user)
@@ -23,6 +26,7 @@ export default function App() {
           <Route path="venta" element={<NewSale />} />
           <Route path="inventario" element={<Inventory />} />
           <Route path="coach" element={<AICoach />} />
+          <Route path="qr" element={<QRCobro />} />
         </Route>
       </Routes>
     </BrowserRouter>
