@@ -7,7 +7,6 @@ import NewSale from './pages/NewSale'
 import Inventory from './pages/Inventory'
 import AICoach from './pages/AICoach'
 import Layout from './components/Layout'
-import Inventory from './pages/Inventory'
 import QRCobro from './pages/QRCobro'
 
 
