@@ -6,7 +6,7 @@ import { useStore } from '../store/useStore'
 export default function Onboarding() {
   const navigate = useNavigate()
   const { register, login } = useStore()
-  const [mode, setMode] = useState('welcome') // welcome | register | login
+  const [mode, setMode] = useState('welcome')
   const [form, setForm] = useState({ name: '', phone: '', business_name: '', email: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -50,16 +50,24 @@ export default function Onboarding() {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Fondo decorativo */}
+      {/* Círculos decorativos */}
       <div style={{
         position: 'absolute', right: -60, top: -60,
         width: 280, height: 280, borderRadius: '50%',
-        background: 'rgba(255,255,255,0.05)',
+        background: 'var(--verde-oscuro)',
+        opacity: 0.6,
       }} />
       <div style={{
         position: 'absolute', left: -80, bottom: 120,
         width: 220, height: 220, borderRadius: '50%',
-        background: 'rgba(245,200,66,0.08)',
+        background: '#94bf18',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        position: 'absolute', right: 20, bottom: 80,
+        width: 100, height: 100, borderRadius: '50%',
+        background: 'var(--verde-oscuro)',
+        opacity: 0.3,
       }} />
 
       <div style={{ position: 'relative' }}>
@@ -67,10 +75,10 @@ export default function Onboarding() {
           fontFamily: 'Playfair Display, serif',
           fontSize: 36,
           fontWeight: 900,
-          color: 'var(--amarillo)',
+          color: 'var(--morado)',
           marginBottom: 4,
         }}>Parva.</div>
-        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>
+        <p style={{ color: 'rgba(61,31,110,0.5)', fontSize: 14 }}>
           SheShips Hackathon 2026
         </p>
       </div>
@@ -80,15 +88,15 @@ export default function Onboarding() {
           fontFamily: 'Playfair Display, serif',
           fontSize: 48,
           fontWeight: 900,
-          color: 'white',
+          color: 'var(--tinta)',
           lineHeight: 1,
           marginBottom: 20,
         }}>
           La plata<br />que te<br />
-          <span style={{ color: 'var(--amarillo)', fontStyle: 'italic' }}>cuida.</span>
+          <span style={{ color: 'var(--morado)', fontStyle: 'italic' }}>cuida.</span>
         </h1>
         <p style={{
-          color: 'rgba(255,255,255,0.65)',
+          color: 'rgba(0,0,0,0.55)',
           fontSize: 16,
           fontWeight: 300,
           lineHeight: 1.6,
@@ -99,11 +107,11 @@ export default function Onboarding() {
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <button className="btn-primary" style={{ background: 'var(--amarillo)', color: 'var(--tinta)' }}
+          <button className="btn-primary"
             onClick={() => setMode('register')}>
             Empezar gratis
           </button>
-          <button className="btn-secondary" style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
+          <button className="btn-secondary"
             onClick={() => setMode('login')}>
             Ya tengo cuenta
           </button>
@@ -116,7 +124,7 @@ export default function Onboarding() {
       }}>
         {['📱 Solo celular', '💚 Sin banco', '🏥 Seguro incluido'].map(t => (
           <span key={t} style={{
-            fontSize: 11, color: 'rgba(255,255,255,0.5)',
+            fontSize: 11, color: 'rgba(0,0,0,0.4)',
             textAlign: 'center', lineHeight: 1.4,
           }}>{t}</span>
         ))}
@@ -127,11 +135,11 @@ export default function Onboarding() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--crema)', padding: '60px 24px 40px' }}>
       <button onClick={() => setMode('welcome')}
-        style={{ background: 'none', border: 'none', fontSize: 24, marginBottom: 32, cursor: 'pointer' }}>
+        style={{ background: 'none', border: 'none', fontSize: 24, marginBottom: 32, cursor: 'pointer', color: 'var(--morado)' }}>
         ←
       </button>
 
-      <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 32, marginBottom: 8 }}>
+      <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 32, marginBottom: 8, color: 'var(--morado)' }}>
         {mode === 'register' ? '¡Bienvenida!' : 'Hola de nuevo'}
       </h2>
       <p style={{ color: 'var(--gris-medio)', fontSize: 15, marginBottom: 32, fontWeight: 300 }}>
@@ -156,11 +164,11 @@ export default function Onboarding() {
                 onChange={e => setForm(f => ({ ...f, business_name: e.target.value }))} />
             </div>
             <div>
-            <label className="label">Tu correo electrónico</label>
-            <input className="input-field" placeholder="Ej: valentina@gmail.com" type="email"
-              value={form.email}
-              onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
-          </div>
+              <label className="label">Tu correo electrónico</label>
+              <input className="input-field" placeholder="Ej: valentina@gmail.com" type="email"
+                value={form.email}
+                onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+            </div>
           </>
         )}
         <div>
