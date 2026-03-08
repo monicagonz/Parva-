@@ -1,6 +1,7 @@
+
 // src/pages/AICoach.jsx
 import { useState, useRef, useEffect } from 'react'
-import { Sparkles, Send, Volume2, VolumeX } from 'lucide-react'
+import { Send, Volume2, VolumeX } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import { askCoach, speakResponse } from '../lib/ai'
 
@@ -40,14 +41,11 @@ export default function AICoach() {
     try {
       const summary = getSummary()
       const response = await askCoach({ question: q, summary, userName: user?.name || 'amiga' })
-
       setMessages(m => [...m, { role: 'bot', text: response }])
 
-      // Intentar voz con ElevenLabs
       const url = await speakResponse(response)
       if (url) {
         setAudioUrl(url)
-        // Reproducir automáticamente
         setTimeout(() => {
           audioRef.current?.play()
           setPlaying(true)
@@ -65,41 +63,43 @@ export default function AICoach() {
 
   const toggleAudio = () => {
     if (!audioRef.current) return
-    if (playing) {
-      audioRef.current.pause()
-      setPlaying(false)
-    } else {
-      audioRef.current.play()
-      setPlaying(true)
-    }
+    if (playing) { audioRef.current.pause(); setPlaying(false) }
+    else { audioRef.current.play(); setPlaying(true) }
   }
 
   return (
     <div className="page" style={{ display: 'flex', flexDirection: 'column', height: '100vh', paddingBottom: 0 }}>
-      {/* Header */}
+      {/* Header verde lima */}
       <div style={{
         background: 'var(--verde)',
         padding: '52px 20px 20px',
         flexShrink: 0,
+        position: 'relative',
+        overflow: 'hidden',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{
+          position: 'absolute', right: -40, top: -40,
+          width: 140, height: 140, borderRadius: '50%',
+          background: 'var(--verde-oscuro)', opacity: 0.5,
+        }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, position: 'relative', zIndex: 1 }}>
           <div style={{
             width: 44, height: 44, borderRadius: '50%',
-            background: 'var(--amarillo)',
+            background: 'var(--morado)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 20,
           }}>🌱</div>
           <div>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: 'white' }}>
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: 'var(--morado)' }}>
               Parcera
             </h1>
-            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12 }}>
+            <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 12 }}>
               Tu coach financiera · siempre activa
             </p>
           </div>
           {audioUrl && (
             <button onClick={toggleAudio} style={{
-              marginLeft: 'auto', background: 'rgba(255,255,255,0.15)',
+              marginLeft: 'auto', background: 'var(--morado)',
               border: 'none', borderRadius: '50%', width: 36, height: 36,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: 'white', cursor: 'pointer',
@@ -125,7 +125,7 @@ export default function AICoach() {
             {m.role === 'bot' && (
               <div style={{
                 width: 28, height: 28, borderRadius: '50%',
-                background: 'var(--amarillo)',
+                background: 'var(--morado)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 12, marginRight: 8, flexShrink: 0, alignSelf: 'flex-end',
               }}>🌱</div>
@@ -134,7 +134,7 @@ export default function AICoach() {
               maxWidth: '75%',
               padding: '12px 16px',
               borderRadius: m.role === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-              background: m.role === 'user' ? 'var(--verde)' : 'white',
+              background: m.role === 'user' ? 'var(--morado)' : 'white',
               color: m.role === 'user' ? 'white' : 'var(--tinta)',
               fontSize: 14, lineHeight: 1.6,
               boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
@@ -148,7 +148,7 @@ export default function AICoach() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <div style={{
               width: 28, height: 28, borderRadius: '50%',
-              background: 'var(--amarillo)',
+              background: 'var(--morado)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12,
             }}>🌱</div>
             <div style={{
@@ -159,7 +159,7 @@ export default function AICoach() {
                 {[0, 1, 2].map(i => (
                   <div key={i} style={{
                     width: 6, height: 6, borderRadius: '50%',
-                    background: 'var(--gris-medio)',
+                    background: 'var(--morado)',
                     animation: `pulse 1.2s ease ${i * 0.2}s infinite`,
                   }} />
                 ))}
@@ -170,7 +170,7 @@ export default function AICoach() {
         <div ref={bottomRef} />
       </div>
 
-      {/* Sugerencias rápidas */}
+      {/* Sugerencias — morado */}
       {messages.length <= 2 && (
         <div style={{
           padding: '12px 16px',
@@ -180,10 +180,12 @@ export default function AICoach() {
           {SUGERENCIAS.map(s => (
             <button key={s} onClick={() => send(s)}
               style={{
-                background: 'var(--verde-bg)', color: 'var(--verde)',
-                border: '1px solid rgba(29,106,74,0.2)',
+                background: 'var(--morado-bg)',
+                color: 'var(--morado)',
+                border: '1.5px solid var(--morado)',
                 borderRadius: 100, padding: '8px 16px',
-                fontSize: 12, fontWeight: 500, whiteSpace: 'nowrap', cursor: 'pointer',
+                fontSize: 12, fontWeight: 500,
+                whiteSpace: 'nowrap', cursor: 'pointer',
               }}>
               {s}
             </button>
@@ -209,7 +211,7 @@ export default function AICoach() {
         <button onClick={() => send()} disabled={!input.trim() || loading}
           style={{
             width: 44, height: 44, borderRadius: '50%',
-            background: input.trim() ? 'var(--verde)' : '#e2ddd5',
+            background: input.trim() ? 'var(--morado)' : '#e2ddd5',
             border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             transition: 'background 0.2s',
