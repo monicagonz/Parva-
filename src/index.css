@@ -1,21 +1,22 @@
 /* src/index.css */
 :root {
-  --verde:       #1d6a4a;
-  --verde-claro: #2d9e6e;
-  --verde-bg:    #e8f5ef;
-  --amarillo:    #f5c842;
-  --amarillo-bg: #fef9e7;
-  --rosa:        #e8547a;
-  --rosa-bg:     #fce8ee;
-  --crema:       #fdf8f0;
-  --tinta:       #111208;
-  --gris:        #f4f1ea;
-  --gris-medio:  #9e9b93;
-  --blanco:      #ffffff;
-  --sombra:      0 4px 24px rgba(17, 18, 8, 0.08);
-  --sombra-lg:   0 12px 40px rgba(17, 18, 8, 0.12);
-  --radio:       16px;
-  --radio-lg:    24px;
+  --verde:        #c8f135;
+  --verde-oscuro: #a8d420;
+  --verde-bg:     #f0fad0;
+  --morado:       #3d1f6e;
+  --morado-claro: #c4a8e8;
+  --morado-bg:    #f0e8ff;
+  --rosa:         #e8547a;
+  --rosa-bg:      #fce8ee;
+  --crema:        #fdf8f0;
+  --tinta:        #1a1a1a;
+  --gris:         #f4f1ea;
+  --gris-medio:   #9e9b93;
+  --blanco:       #ffffff;
+  --sombra:       0 4px 24px rgba(17, 18, 8, 0.08);
+  --sombra-lg:    0 12px 40px rgba(17, 18, 8, 0.12);
+  --radio:        16px;
+  --radio-lg:     24px;
 }
 
 * {
@@ -35,7 +36,7 @@ body {
   background: var(--crema);
   color: var(--tinta);
   min-height: 100vh;
-  max-width: 430px;       /* mobile first */
+  max-width: 430px;
   margin: 0 auto;
   position: relative;
   overflow-x: hidden;
@@ -68,7 +69,7 @@ input, textarea, select {
 
 .btn-primary {
   width: 100%;
-  background: var(--verde);
+  background: var(--morado);
   color: white;
   padding: 16px;
   border-radius: var(--radio);
@@ -77,21 +78,21 @@ input, textarea, select {
   transition: background 0.2s, transform 0.1s;
 }
 .btn-primary:active { transform: scale(0.98); }
-.btn-primary:hover  { background: var(--verde-claro); }
+.btn-primary:hover  { background: #2d1554; }
 
 .btn-secondary {
   width: 100%;
   background: transparent;
-  color: var(--verde);
+  color: var(--morado);
   padding: 14px;
   border-radius: var(--radio);
   font-size: 15px;
   font-weight: 500;
-  border: 2px solid var(--verde);
+  border: 2px solid var(--morado);
   transition: all 0.2s;
 }
 .btn-secondary:hover {
-  background: var(--verde-bg);
+  background: var(--morado-bg);
 }
 
 .input-field {
@@ -105,7 +106,21 @@ input, textarea, select {
   transition: border-color 0.2s;
 }
 .input-field:focus {
-  border-color: var(--verde);
+  border-color: var(--morado);
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #e2ddd5;
+  border-radius: var(--radio);
+  font-size: 16px;
+  background: white;
+  color: var(--tinta);
+  transition: border-color 0.2s;
+}
+.input:focus {
+  border-color: var(--morado);
 }
 
 .label {
@@ -157,7 +172,7 @@ input, textarea, select {
 }
 
 .nav-item.active {
-  color: var(--verde);
+  color: var(--morado);
 }
 
 .nav-item svg {
@@ -172,13 +187,13 @@ input, textarea, select {
   right: calc(50% - 215px + 16px);
   width: 56px;
   height: 56px;
-  background: var(--amarillo);
-  color: var(--tinta);
+  background: var(--verde);
+  color: var(--morado);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(245, 200, 66, 0.5);
+  box-shadow: 0 4px 20px rgba(200, 241, 53, 0.5);
   z-index: 99;
   transition: transform 0.2s;
 }
@@ -211,19 +226,45 @@ input, textarea, select {
 .page-header {
   padding: 52px 20px 20px;
   background: var(--verde);
-  color: white;
+  color: var(--tinta);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: var(--verde-oscuro);
+  opacity: 0.5;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  left: -30px; bottom: -30px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: #94bf18;
+  opacity: 0.3;
 }
 
 .page-header h1 {
   font-size: 28px;
-  color: white;
+  color: var(--tinta);
+  position: relative;
+  z-index: 1;
 }
 
 .page-header p {
   font-size: 14px;
-  color: rgba(255,255,255,0.65);
+  color: rgba(0,0,0,0.5);
   margin-top: 4px;
   font-weight: 300;
+  position: relative;
+  z-index: 1;
 }
 
 .page-body {
