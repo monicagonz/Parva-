@@ -7,7 +7,7 @@ export default function Onboarding() {
   const navigate = useNavigate()
   const { register, login } = useStore()
   const [mode, setMode] = useState('welcome') // welcome | register | login
-  const [form, setForm] = useState({ name: '', phone: '', business_name: '' })
+  const [form, setForm] = useState({ name: '', phone: '', business_name: '', email: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -155,6 +155,12 @@ export default function Onboarding() {
                 value={form.business_name}
                 onChange={e => setForm(f => ({ ...f, business_name: e.target.value }))} />
             </div>
+            <div>
+            <label className="label">Tu correo electrónico</label>
+            <input className="input-field" placeholder="Ej: valentina@gmail.com" type="email"
+              value={form.email}
+              onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+          </div>
           </>
         )}
         <div>
