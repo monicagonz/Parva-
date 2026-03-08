@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
-import { Plus, TrendingUp, Heart, ShoppingBag } from 'lucide-react'
+import { Plus, Heart } from 'lucide-react'
 import { useStore } from '../store/useStore'
 
 const fmt = (n) => `$${Number(n || 0).toLocaleString('es-CO')}`
@@ -16,23 +16,22 @@ export default function Dashboard() {
     fetchSales().then(() => setLoaded(true))
   }, [])
 
-  const total    = sales.reduce((a, s) => a + Number(s.amount), 0)
-  const net      = sales.reduce((a, s) => a + Number(s.net_amount), 0)
-  const negocio  = sales.filter(s => s.category === 'negocio').reduce((a, s) => a + Number(s.amount), 0)
-  const hogar    = sales.filter(s => s.category === 'hogar').reduce((a, s) => a + Number(s.amount), 0)
+  const total   = sales.reduce((a, s) => a + Number(s.amount), 0)
+  const net     = sales.reduce((a, s) => a + Number(s.net_amount), 0)
+  const negocio = sales.filter(s => s.category === 'negocio').reduce((a, s) => a + Number(s.amount), 0)
+  const hogar   = sales.filter(s => s.category === 'hogar').reduce((a, s) => a + Number(s.amount), 0)
 
   const pieData = [
     { name: 'Negocio', value: negocio || 1 },
     { name: 'Hogar',   value: hogar   || 0 },
   ]
 
-  // Meta seguro: $50.000 por mes
   const insuranceMeta = 50000
   const insurancePct  = Math.min((insuranceTotal / insuranceMeta) * 100, 100)
 
   return (
     <div className="page">
-      {/* Header */}
+      {/* Header verde lima */}
       <div style={{
         background: 'var(--verde)',
         padding: '52px 20px 24px',
@@ -42,28 +41,34 @@ export default function Dashboard() {
         <div style={{
           position: 'absolute', right: -40, top: -40,
           width: 160, height: 160, borderRadius: '50%',
-          background: 'rgba(255,255,255,0.05)',
+          background: 'var(--verde-oscuro)', opacity: 0.5,
         }} />
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, marginBottom: 4 }}>
+        <div style={{
+          position: 'absolute', left: -30, bottom: -30,
+          width: 100, height: 100, borderRadius: '50%',
+          background: '#94bf18', opacity: 0.3,
+        }} />
+        <p style={{ color: 'rgba(0,0,0,0.5)', fontSize: 14, marginBottom: 4, position: 'relative', zIndex: 1 }}>
           Hola, {user?.name?.split(' ')[0]} 👋
         </p>
         <h1 style={{
           fontFamily: 'Playfair Display, serif',
           fontSize: 36,
-          color: 'white',
+          color: 'var(--tinta)',
           lineHeight: 1,
+          position: 'relative', zIndex: 1,
         }}>
           {fmt(net)}
         </h1>
-        <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, marginTop: 6, fontWeight: 300 }}>
+        <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 13, marginTop: 6, fontWeight: 300, position: 'relative', zIndex: 1 }}>
           ganancia limpia · {sales.length} ventas registradas
         </p>
       </div>
 
       <div className="page-body">
-        {/* Seguro acumulado — EL DIFERENCIADOR */}
+        {/* Seguro acumulado — morado */}
         <div style={{
-          background: 'var(--rosa)',
+          background: 'var(--morado)',
           borderRadius: 'var(--radio)',
           padding: '20px',
           color: 'white',
@@ -77,9 +82,7 @@ export default function Dashboard() {
             <div>
               <div style={{
                 fontFamily: 'Playfair Display, serif',
-                fontSize: 32,
-                fontWeight: 700,
-                lineHeight: 1,
+                fontSize: 32, fontWeight: 700, lineHeight: 1,
               }}>{fmt(insuranceTotal)}</div>
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginTop: 4 }}>
                 acumulado automáticamente
@@ -90,12 +93,11 @@ export default function Dashboard() {
               <span style={{ color: 'white', fontWeight: 600 }}>{fmt(insuranceMeta)}</span>
             </div>
           </div>
-          {/* Barra de progreso */}
           <div style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 8, height: 8, overflow: 'hidden' }}>
             <div style={{
               height: '100%',
               width: `${insurancePct}%`,
-              background: 'white',
+              background: 'var(--verde)',
               borderRadius: 8,
               transition: 'width 1s ease',
             }} />
@@ -116,8 +118,8 @@ export default function Dashboard() {
                 <PieChart>
                   <Pie data={pieData} cx="50%" cy="50%" innerRadius={32} outerRadius={50}
                     dataKey="value" strokeWidth={0}>
-                    <Cell fill="var(--verde)" />
-                    <Cell fill="var(--rosa-bg)" />
+                    <Cell fill="var(--morado)" />
+                    <Cell fill="var(--morado-claro)" />
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
@@ -126,7 +128,7 @@ export default function Dashboard() {
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                    <div style={{ width: 10, height: 10, borderRadius: 2, background: 'var(--verde)' }} />
+                    <div style={{ width: 10, height: 10, borderRadius: 2, background: 'var(--morado)' }} />
                     <span style={{ fontSize: 12, color: 'var(--gris-medio)' }}>Negocio</span>
                   </div>
                   <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, fontWeight: 700 }}>
@@ -135,7 +137,7 @@ export default function Dashboard() {
                 </div>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                    <div style={{ width: 10, height: 10, borderRadius: 2, background: 'var(--rosa)' }} />
+                    <div style={{ width: 10, height: 10, borderRadius: 2, background: 'var(--morado-claro)' }} />
                     <span style={{ fontSize: 12, color: 'var(--gris-medio)' }}>Hogar</span>
                   </div>
                   <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, fontWeight: 700 }}>
@@ -145,8 +147,8 @@ export default function Dashboard() {
               </div>
               {negocio > 0 && (
                 <div style={{
-                  background: 'var(--verde-bg)', borderRadius: 8, padding: '8px 12px',
-                  fontSize: 12, color: 'var(--verde)', fontWeight: 500,
+                  background: 'var(--morado-bg)', borderRadius: 8, padding: '8px 12px',
+                  fontSize: 12, color: 'var(--morado)', fontWeight: 500,
                 }}>
                   {Math.round((negocio / (negocio + hogar)) * 100)}% viene de tu negocio ✨
                 </div>
@@ -179,7 +181,7 @@ export default function Dashboard() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{
                       width: 36, height: 36, borderRadius: 10,
-                      background: s.category === 'negocio' ? 'var(--verde-bg)' : 'var(--rosa-bg)',
+                      background: s.category === 'negocio' ? 'var(--morado-bg)' : 'var(--verde-bg)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontSize: 16,
                     }}>
@@ -196,7 +198,7 @@ export default function Dashboard() {
                     <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 700 }}>
                       {fmt(s.amount)}
                     </div>
-                    <div style={{ fontSize: 11, color: 'var(--verde)', fontWeight: 500 }}>
+                    <div style={{ fontSize: 11, color: 'var(--morado)', fontWeight: 500 }}>
                       neto {fmt(s.net_amount)}
                     </div>
                   </div>
@@ -207,7 +209,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* FAB — Nueva venta */}
+      {/* FAB */}
       <button className="fab" onClick={() => navigate('/app/venta')}>
         <Plus size={24} />
       </button>
