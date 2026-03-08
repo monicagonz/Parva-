@@ -15,7 +15,7 @@ export const useStore = create(
       insuranceTotal: 0,
 
       // ── Auth ──
-      register: async ({ name, phone, business_name }) => {
+      register: async ({ name, phone, business_name, email }) => {
         // Buscar si ya existe
         let { data: existing } = await supabase
           .from('users')
@@ -30,7 +30,7 @@ export const useStore = create(
 
         const { data, error } = await supabase
           .from('users')
-          .insert({ name, phone, business_name })
+          .insert({ name, phone, business_name, email })
           .select()
           .single()
 
@@ -86,6 +86,21 @@ export const useStore = create(
           sales: [data, ...s.sales],
           insuranceTotal: newTotal,
         }))
+
+        // Notificación Make.com
+        try {
+          await fetch('https://hook.us2.make.com/i9fwxq6ahdlqcn6cerfrfduix4f4uuet', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              monto: amount.toLocaleString('es-CO'),
+              seguro: insurance.toLocaleString('es-CO'),
+              neto: net.toLocaleString('es-CO'),
+              email: user.email || 'parcera@parva.app',
+              negocio: user.business_name,
+            })
+          })
+        } catch(e) { console.log('webhook error', e) }
 
         return { sale: data, insurance, net }
       },
